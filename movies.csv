@@ -1,3 +1,4 @@
-Title,Rating,Year
-Titanic,9.2,1995
-The Dark Knight,8.8,2002
+Title,Ratings,Year,Poster,Page
+The Simpsons,8.7,1989�,https://m.media-amazon.com/images/M/MV5BYjFkMTlkYWUtZWFhNy00M2FmLThiOTYtYTRiYjVlZWYxNmJkXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg,tt0096697
+Titanic,7.9,1997,https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg,tt0120338
+The Dark Knight,9.0,2008,https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg,tt0468569

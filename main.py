@@ -3,6 +3,6 @@ from storage_json import StorageJson
 from storage_csv import StorageCsv
 
 #storage = StorageJson('data.json')
-storage = StorageCsv(movies.csv)
+storage = StorageCsv('movies.csv')
 movie_app = MovieApp(storage)
 movie_app.run()
