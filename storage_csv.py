@@ -30,7 +30,7 @@ class StorageCsv(IStorage):
                 raise Exception(self.pr_red("Movie not found!"))
             movie_title = movie_data['Title']
             movie_rating = movie_data[rating]
-            movie_year = movie_data[year]
+            movie_year = movie_data[year].replace('–', '-')
             movie_poster = movie_data[poster]
             movie_page = movie_data[imdb_page]
             with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
@@ -41,7 +41,7 @@ class StorageCsv(IStorage):
             self.pr_red("There is no internet connection!")
 
     def list_movies(self):
-        with open(self.filepath, 'r', encoding='utf-8') as csvfile:
+        with open(self.filepath, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile)
             # Convert CSV data to a list of dictionaries
             data = [dict(row) for row in csvreader]
@@ -74,9 +74,18 @@ class StorageCsv(IStorage):
                 writer.writerow(row)
         return
 
-
-
-
-
     def delete_movie(self, title):
-        pass
+        movie_list = self.list_movies()
+        del movie_list[title]
+        with open(self.filepath, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            header_row = next(reader)
+        with open(self.filepath, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(header_row)
+        with open(self.filepath, 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            for movie, details in movie_list.items():
+                row = [movie] + list(details.values())
+                writer.writerow(row)
+        return

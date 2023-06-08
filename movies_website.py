@@ -1,5 +1,6 @@
-
 MOVIE_URL = f"https://www.imdb.com/title/"
+
+
 def writing_webpage(output):
     """
     Writing the html files needed for the website, replacing the templates htmls
@@ -28,7 +29,7 @@ def serialize_movies(movie, stats):
     year = stats['Year']
     poster = stats['Poster']
     imdb_page = stats['Page']
-    if 'Notes' not in stats:
+    if 'Notes' not in stats or stats['Notes'] is None:
         notes = ""
     else:
         notes = stats['Notes']
@@ -43,5 +44,5 @@ def serialize_movies(movie, stats):
                     <div class="movie-year">IMDB score: {}</div> 
                 </div>                                           
             </li>                                                
-            """.format(MOVIE_URL+imdb_page, notes, poster, title, year, rating)
+            """.format(MOVIE_URL + imdb_page, notes, poster, title, year, rating)
     return output
