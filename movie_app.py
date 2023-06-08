@@ -71,13 +71,13 @@ class MovieApp:
         movies_count = len(movies)
         # calculating Average of movie ratings.
         for val in movies.values():
-            average_rating += val["Ratings"]
+            average_rating += float(val["Ratings"])
         average_rating = average_rating / len(movies)
         # calculating median for even and odd overall movies
         if movies_count % 2 == 1:
             median_rating = values_list[movies_count // 2]
         if movies_count % 2 == 0:
-            median_rating = (values_list[movies_count // 2] + values_list[movies_count // 2 - 1]) / 2
+            median_rating = (float(values_list[movies_count // 2]) + float(values_list[movies_count // 2 - 1])) / 2
         # String with the best movies and their ratings
         for key, val in sorted_movies_dict.items():
             if val >= values_list[0]:
