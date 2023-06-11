@@ -1,4 +1,5 @@
 import csv
+import os
 
 import requests
 
@@ -21,7 +22,7 @@ class StorageCsv(IStorage):
 
     def add_movie(self, title, rating, year, poster, imdb_page):
         """
-        Adding a movie to the json file if it exists on the api database
+        Adding a movie to the csv file if it exists on the api database
         """
         try:
             res = requests.get(URL + title)
@@ -42,6 +43,11 @@ class StorageCsv(IStorage):
 
     def list_movies(self):
         with open(self.filepath, 'r') as csvfile:
+            if os.path.getsize(self.filepath) == 0:
+                header_row = ['Title', 'Ratings', 'Year', 'Poster', 'Page', 'Notes']
+                with open(self.filepath, 'w', newline='') as csvfile2:
+                    writer = csv.writer(csvfile2)
+                    writer.writerow(header_row)
             csvreader = csv.DictReader(csvfile)
             # Convert CSV data to a list of dictionaries
             data = [dict(row) for row in csvreader]

@@ -50,6 +50,9 @@ class MovieApp:
         Prints a list of all movies and their ratings.
         """
         movies = self._storage.list_movies()
+        if movies is None:
+            print("No movies currently in the database")
+            return
         total = len(movies)
         print(f"\n{total} movies in total")
         for key in movies:
@@ -109,9 +112,10 @@ class MovieApp:
         """
         movies_list = self._storage.list_movies()
         movie_name = input("\nEnter new movie name: \033[33m")
-        if movie_name in movies_list:
-            self.pr_red(f"Movie {movie_name} already exist!\n")
-            return
+        if movies_list is not None:
+            if movie_name in movies_list:
+                self.pr_red(f"Movie {movie_name} already exist!\n")
+                return
         try:
             self._storage.add_movie(movie_name, "imdbRating", "Year", "Poster", "imdbID")
             print(f"\033[00mMovie {movie_name} successfully added\n")
@@ -240,7 +244,7 @@ Enter your choice (0-10):\033[0m""")
                 user_choice = int(input('\033[33m'))
                 print('\033[00m')
                 movie_choices[user_choice]()
-            except (ValueError, KeyError):
+            except (KeyError):
                 self.clr_scr()
                 continue
             input("\nPlease press Enter to continue")

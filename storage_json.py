@@ -1,4 +1,5 @@
 import json
+import os
 
 import requests
 
@@ -21,6 +22,8 @@ class StorageJson(IStorage):
 
     def list_movies(self):
         with open(self.filepath, 'r') as handle:
+            if os.path.getsize(self.filepath) == 0:
+                return
             movies_data = json.load(handle)
         return movies_data
 
@@ -29,6 +32,8 @@ class StorageJson(IStorage):
         Adding a movie to the json file if it exists on the api database
         """
         movies_list = self.list_movies()
+        if movies_list is None:
+            movies_list = {}
         try:
             res = requests.get(URL + title)
             movie_data = res.json()
